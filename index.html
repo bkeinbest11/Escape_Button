@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Support Escape Button 💖</title>
+<style>
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1e88e5, #42a5f5, #ff4081);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #fff;
+  height: 100%;
+}
+
+@keyframes gradientBG {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.container {
+  max-width: 700px;
+  margin: 50px auto;
+  background: rgba(0,0,0,0.7);
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #fff, 0 0 40px #42a5f5 inset;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #fff;
+  text-shadow: 0 0 15px #ff4081;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 25px;
+}
+
+.donations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  justify-items: center;
+}
+
+.donation-card {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 300px;
+  box-shadow: 0 0 10px #fff, 0 0 20px #42a5f5 inset;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.donation-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #fff, 0 0 40px #ff4081 inset;
+}
+
+.donation-card h2 {
+  margin-bottom: 10px;
+  color: #ffeb3b;
+  text-shadow: 0 0 5px #000;
+}
+
+.donation-card p {
+  font-size: 1em;
+  word-break: break-all;
+}
+
+footer {
+  margin-top: 30px;
+  font-size: 0.9em;
+  color: #ccc;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Support Escape Button 💖</h1>
+  <p>Hey there! If you love Escape Button and want to support its development, consider sending a donation. Every contribution helps keep this project alive and growing! 🚀</p>
+
+  <div class="donations">
+    <div class="donation-card">
+      <h2>Bitcoin (BTC)</h2>
+      <p>bc1qppreqt2yuungu6kmf5sf77k464tzudtw8fdx59</p>
+    </div>
+    <div class="donation-card">
+      <h2>Ethereum (ETH)</h2>
+      <p>0x2FeE837d6ABD384099d9f9172f0065Ce36202473</p>
+    </div>
+    <div class="donation-card">
+      <h2>Solana (SOL)</h2>
+      <p>7JfqmTGdXD7XrcLsGqrhCv3xXH5iQznVJq613GGxPjjT</p>
+    </div>
+    <div class="donation-card">
+      <h2>PayPal</h2>
+      <p>Not yet, will be added soon!</p>
+    </div>
+  </div>
+
+  <p>Even a small donation helps a lot! Thank you for supporting Escape Button ❤️</p>
+</div>
+
+<footer>
+  &copy; 2025 Escape Button. All rights reserved.
+</footer>
+
+</body>
+</html>
