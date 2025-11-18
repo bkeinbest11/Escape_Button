@@ -1,4 +1,4 @@
-Escape Button — The "Quick! Someone’s Coming!" Extension 🚨💨
+#Escape Button — The "Quick! Someone’s Coming!" Extension 🚨💨
 
 Uh-oh! Someone’s sneaking up on you while you’re browsing the web, and you need to vanish like a ninja? Fear not! Escape Button has your back. This Chrome extension is your ultimate “oops, don’t look at my tabs!” tool.
 
