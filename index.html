@@ -10,25 +10,25 @@ body, html {
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #1e88e5, #42a5f5, #ff4081);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  background-size: 300% 300%;
+  animation: gradientBG 20s ease infinite;
   color: #fff;
-  height: 100%;
+  min-height: 100%;
 }
 
 @keyframes gradientBG {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
 }
 
 .container {
   max-width: 700px;
-  margin: 50px auto;
-  background: rgba(0,0,0,0.7);
-  padding: 30px 25px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #fff, 0 0 40px #42a5f5 inset;
+  margin: 60px auto;
+  background: rgba(0,0,0,0.65);
+  padding: 35px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
   text-align: center;
 }
 
@@ -36,7 +36,7 @@ h1 {
   font-size: 2.5em;
   margin-bottom: 15px;
   color: #fff;
-  text-shadow: 0 0 15px #ff4081;
+  text-shadow: 0 0 8px #ff4081;
 }
 
 p {
@@ -46,30 +46,30 @@ p {
 
 .donations {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   justify-items: center;
 }
 
 .donation-card {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
   padding: 20px;
-  border-radius: 15px;
+  border-radius: 12px;
   width: 100%;
   max-width: 300px;
-  box-shadow: 0 0 10px #fff, 0 0 20px #42a5f5 inset;
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 8px rgba(255,255,255,0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .donation-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #fff, 0 0 40px #ff4081 inset;
+  transform: scale(1.04);
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
 }
 
 .donation-card h2 {
   margin-bottom: 10px;
-  color: #ffeb3b;
-  text-shadow: 0 0 5px #000;
+  color: #ffd700;
+  text-shadow: 0 0 4px #000;
 }
 
 .donation-card p {
@@ -81,6 +81,7 @@ footer {
   margin-top: 30px;
   font-size: 0.9em;
   color: #ccc;
+  text-align: center;
 }
 </style>
 </head>
