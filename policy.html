@@ -2,110 +2,333 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Escape Button – Privacy Policy</title>
 <link rel="icon" type="image/png" sizes="128x128" href="icon128.png">
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #0d1117;
-    color: #fff;
-    margin: 0;
-    padding: 40px;
-    line-height: 1.6;
+/* ===== Root Variables ===== */
+:root {
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --accent: #ec4899;
+  --bg-dark: #0f172a;
+  --bg-light: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --border: #334155;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+
+/* ===== Navigation ===== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
+
+.nav-back {
+  color: var(--primary-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-back:hover {
+  color: var(--accent);
+}
+
+/* ===== Scroll Container ===== */
+.scroll-container {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+/* ===== Header ===== */
+.page-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.page-header h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* ===== Content Sections ===== */
+section {
+  margin-bottom: 50px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h2::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+strong {
+  color: var(--text-primary);
+}
+
+ul {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+li {
+  padding: 12px 0;
+  padding-left: 30px;
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ===== Highlight Box ===== */
+.highlight-box {
+  background: rgba(99, 102, 241, 0.1);
+  border-left: 4px solid var(--primary);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 30px 0;
+}
+
+.highlight-box p {
+  margin: 0;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* ===== Link Styling ===== */
+a {
+  color: var(--primary-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ===== Footer ===== */
+footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
   }
 
   .container {
-    max-width: 800px;
-    margin: auto;
-    background: #161b22;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px #1e88e5;
+    padding: 40px 20px;
   }
 
-  h1 {
-    text-align: center;
-    color: #1e90ff;
-    margin-bottom: 20px;
+  .page-header h1 {
+    font-size: 32px;
   }
 
   h2 {
-    color: #4da3ff;
-    margin-top: 25px;
+    font-size: 20px;
   }
-
-  a {
-    color: #58a6ff;
-  }
+}
 </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>Privacy Policy</h1>
+<nav>
+  <a href="index.html" class="logo">⚡ Escape Button</a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
 
-  <p><strong>Last Updated:</strong> Today</p>
+<div class="scroll-container">
+  <div class="container">
+    <div class="page-header">
+      <h1>Privacy Policy</h1>
+      <p>Your privacy matters to us. Here's everything you need to know.</p>
+    </div>
 
-  <p>
-    Escape Button is designed to provide a quick shortcut to close all tabs,
-    clear browsing history (except for whitelisted sites), and open a Safe Site.
-    This extension focuses only on this single purpose and does not track,
-    store, upload, or share any user data.
-  </p>
+    <section>
+      <h2>Our Commitment</h2>
+      <p>
+        Escape Button is designed with privacy as the core principle. We access only the minimum browser data 
+        needed to function, and everything happens locally on your device. No data is collected, sold, or shared.
+      </p>
+    </section>
 
-  <h2>Information We Access</h2>
-  <p>
-    Escape Button only accesses one type of browser data:
-  </p>
-  <ul>
-    <li><strong>Web History</strong> – accessed only to delete non-whitelisted history entries when the user activates the shortcut.</li>
-  </ul>
-  <p>
-    No other information is accessed, collected, or processed.
-  </p>
+    <section>
+      <h2>What We Access</h2>
+      <p>Escape Button only accesses one type of data:</p>
+      <ul>
+        <li><strong>Browsing History</strong> – Only accessed to delete non-whitelisted entries when you activate the shortcut</li>
+      </ul>
+      <p>That's it. Nothing else.</p>
+    </section>
 
-  <h2>Information We Do NOT Collect</h2>
-  <p>Escape Button does <strong>NOT</strong> collect, store, or transmit any of the following:</p>
-  <ul>
-    <li>Personal information (name, email, age, address…)</li>
-    <li>Passwords, authentication info, or credentials</li>
-    <li>Financial or payment information</li>
-    <li>Location or IP data</li>
-    <li>Health data</li>
-    <li>Messages, communications, or website content</li>
-    <li>User activity (mouse, keystrokes, clicks, etc.)</li>
-  </ul>
+    <section>
+      <h2>What We Do NOT Collect</h2>
+      <p>Escape Button explicitly does NOT collect, store, or transmit:</p>
+      <ul>
+        <li>Personal information (name, email, age, location, etc.)</li>
+        <li>Passwords, authentication tokens, or credentials</li>
+        <li>Financial or payment data</li>
+        <li>IP addresses or geolocation data</li>
+        <li>Health or sensitive personal information</li>
+        <li>Website content, messages, or communications</li>
+        <li>User activity (clicks, keystrokes, scrolling, etc.)</li>
+        <li>Browsing patterns or analytics</li>
+      </ul>
+    </section>
 
-  <h2>Data Storage</h2>
-  <p>
-    The extension only stores your Safe Site and Whitelist settings locally using
-    Chrome’s <strong>storage</strong> API.  
-    This data never leaves your device.
-  </p>
+    <div class="highlight-box">
+      <p>🔒 Your data never leaves your device. Period.</p>
+    </div>
 
-  <h2>No Data Sharing</h2>
-  <p>
-    Escape Button does not send any data to developers, servers, analytics tools,
-    advertisers, or third parties.  
-    Nothing is uploaded or transferred.
-  </p>
+    <section>
+      <h2>Data Storage</h2>
+      <p>
+        The extension stores only your Safe Site URL and Whitelist settings locally using 
+        Chrome's <strong>storage API</strong>. This data remains entirely on your device and never leaves it.
+      </p>
+    </section>
 
-  <h2>Remote Code</h2>
-  <p>
-    Escape Button does <strong>not</strong> use remote code, external scripts, CDNs,
-    or eval(). All code is packaged inside the extension.
-  </p>
+    <section>
+      <h2>No External Communication</h2>
+      <ul>
+        <li>No data is sent to our servers (we don't have any)</li>
+        <li>No analytics or tracking tools are used</li>
+        <li>No advertisements or third-party services</li>
+        <li>No remote code execution or external scripts</li>
+        <li>All code is self-contained in the extension</li>
+      </ul>
+    </section>
 
-  <h2>Changes to This Policy</h2>
-  <p>
-    Any updates to this Privacy Policy will be posted on this page.
-  </p>
+    <section>
+      <h2>Code Transparency</h2>
+      <p>
+        Escape Button is open source. You can inspect every line of code on 
+        <a href="https://github.com/bkeinbest11/Escape_Button" target="_blank">GitHub</a> 
+        to verify exactly what it does and doesn't do.
+      </p>
+    </section>
 
-  <h2>Contact</h2>
-  <p>
-    If you have questions or suggestions, please contact the developer via bkeinbest11@gmail.com
-  </p>
+    <section>
+      <h2>Updates to This Policy</h2>
+      <p>
+        If we ever make changes to this Privacy Policy, we'll post the update on this page 
+        and update the last modified date.
+      </p>
+    </section>
 
+    <section>
+      <h2>Questions?</h2>
+      <p>
+        If you have any concerns or questions about your privacy with Escape Button, 
+        feel free to reach out to <a href="mailto:bkeinbest11@gmail.com">bkeinbest11@gmail.com</a>
+      </p>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Escape Button. Built with privacy first.</p>
+      <p style="margin-top: 15px;">Last Updated: January 2025</p>
+    </footer>
+  </div>
 </div>
 
 </body>
