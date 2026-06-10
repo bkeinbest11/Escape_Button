@@ -10,10 +10,12 @@
 :root {
   --primary: #6366f1;
   --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
   --accent: #ec4899;
   --accent-light: #f472b6;
   --bg-dark: #0f172a;
   --bg-light: #1e293b;
+  --bg-lighter: #334155;
   --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
   --gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
@@ -30,6 +32,51 @@ body, html {
   background: var(--bg-dark);
   color: var(--text-primary);
   line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== Animated Background ===== */
+.background-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: float 15s ease-in-out infinite;
+}
+
+.glow-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: #6366f1;
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.glow-orb-2 {
+  width: 300px;
+  height: 300px;
+  background: #ec4899;
+  bottom: -50px;
+  right: -50px;
+  animation-delay: 3s;
+  animation-duration: 12s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(100px, 50px); }
 }
 
 /* ===== Navigation ===== */
@@ -38,12 +85,24 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(99, 102, 241, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
+  animation: slideDown 0.6s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .logo {
@@ -53,6 +112,12 @@ nav {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .nav-links {
@@ -65,11 +130,33 @@ nav {
   text-decoration: none;
   color: var(--text-secondary);
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient);
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
   color: var(--primary-light);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ===== Main Content ===== */
+main {
+  position: relative;
+  z-index: 1;
 }
 
 /* ===== Hero Section ===== */
@@ -77,30 +164,61 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 85vh;
   padding: 60px 40px;
   text-align: center;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.05) 100%);
+}
+
+.hero-content {
+  max-width: 800px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  display: inline-block;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
 .hero-content h1 {
   font-size: 56px;
   font-weight: 800;
   margin-bottom: 20px;
+  line-height: 1.2;
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.2;
 }
 
 .hero-content p {
   font-size: 20px;
   color: var(--text-secondary);
   margin-bottom: 40px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .cta-button {
@@ -114,18 +232,64 @@ nav {
   font-size: 16px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease;
+  z-index: 0;
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+.cta-button span {
+  position: relative;
+  z-index: 1;
 }
 
 .cta-button:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 8px 35px rgba(99, 102, 241, 0.6);
+}
+
+.cta-secondary {
+  background: rgba(99, 102, 241, 0.1);
+  border: 2px solid var(--primary);
+  color: var(--primary-light);
+}
+
+.cta-secondary:hover {
+  background: rgba(99, 102, 241, 0.2);
+  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
 }
 
 /* ===== Features Section ===== */
 .features {
-  padding: 80px 40px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 100px 40px;
+  background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.05) 100%);
+  position: relative;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
 }
 
 .section-title {
@@ -134,32 +298,70 @@ nav {
   font-weight: 700;
   margin-bottom: 60px;
   color: var(--text-primary);
+  animation: fadeInUp 0.8s ease both;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .feature-card {
-  background: var(--bg-light);
-  padding: 30px;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 40px 30px;
   border-radius: 16px;
   border: 1px solid rgba(99, 102, 241, 0.2);
   transition: all 0.3s ease;
   text-align: center;
+  animation: fadeInUp 0.8s ease both;
+  position: relative;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-card:nth-child(4) { animation-delay: 0.4s; }
+.feature-card:nth-child(5) { animation-delay: 0.5s; }
+.feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient);
+  border-radius: 16px 16px 0 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
 }
 
 .feature-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-12px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+  background: rgba(30, 41, 59, 0.8);
 }
 
 .feature-icon {
-  font-size: 48px;
+  font-size: 50px;
   margin-bottom: 20px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.15) rotate(10deg);
 }
 
 .feature-card h3 {
@@ -171,53 +373,95 @@ nav {
 .feature-card p {
   color: var(--text-secondary);
   font-size: 14px;
+  margin: 0;
 }
 
-/* ===== How It Works ===== */
+/* ===== How It Works Section ===== */
 .how-it-works {
-  padding: 80px 40px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(236, 72, 153, 0.05) 100%);
+  padding: 100px 40px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.05) 0%, transparent 100%);
+  position: relative;
+}
+
+.how-it-works::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
 }
 
 .how-content {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
 .steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
 }
 
 .step {
-  background: var(--bg-light);
-  padding: 30px;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 40px;
   border-radius: 16px;
-  border-left: 4px solid var(--primary);
+  border: 1px solid rgba(99, 102, 241, 0.2);
   position: relative;
+  animation: fadeInUp 0.8s ease both;
+  transition: all 0.3s ease;
+}
+
+.step:nth-child(1) { animation-delay: 0.1s; }
+.step:nth-child(2) { animation-delay: 0.2s; }
+.step:nth-child(3) { animation-delay: 0.3s; }
+
+.step:hover {
+  border-color: var(--accent);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15);
 }
 
 .step-number {
   position: absolute;
-  top: -15px;
-  left: 30px;
-  width: 40px;
-  height: 40px;
+  top: -20px;
+  left: 40px;
+  width: 50px;
+  height: 50px;
   background: var(--gradient);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
   color: white;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  animation: scaleIn 0.6s ease both;
+}
+
+.step:nth-child(1) .step-number { animation-delay: 0.2s; }
+.step:nth-child(2) .step-number { animation-delay: 0.3s; }
+.step:nth-child(3) .step-number { animation-delay: 0.4s; }
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .step h4 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 25px;
+  margin-bottom: 15px;
   font-size: 18px;
   color: var(--primary-light);
 }
@@ -225,16 +469,56 @@ nav {
 .step p {
   color: var(--text-secondary);
   font-size: 14px;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ===== CTA Section ===== */
+.cta-section {
+  padding: 100px 40px;
+  text-align: center;
+  position: relative;
+}
+
+.cta-section h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta-section p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ===== Footer ===== */
 footer {
   padding: 40px;
   text-align: center;
-  background: var(--bg-light);
+  background: rgba(30, 41, 59, 0.5);
   border-top: 1px solid rgba(99, 102, 241, 0.1);
   color: var(--text-secondary);
   font-size: 14px;
+  animation: slideUp 0.6s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 footer a {
@@ -268,100 +552,132 @@ footer a:hover {
     font-size: 16px;
   }
 
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-button {
+    width: 100%;
+  }
+
   .features, .how-it-works {
-    padding: 50px 20px;
+    padding: 60px 20px;
   }
 
   .section-title {
     font-size: 32px;
-    margin-bottom: 40px;
+  }
+
+  .feature-card, .step {
+    padding: 30px 20px;
+  }
+
+  .cta-section {
+    padding: 60px 20px;
   }
 }
 </style>
 </head>
 <body>
 
+<div class="background-glow">
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+</div>
+
 <nav>
   <div class="logo">⚡ Escape Button</div>
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
     <li><a href="#how">How It Works</a></li>
-    <li><a href="policy.html">Privacy</a></li>
+    <li><a href="https://github.com/bkeinbest11/Escape_Button" target="_blank">GitHub</a></li>
   </ul>
 </nav>
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>Your Emergency Exit Button</h1>
-    <p>Close all tabs instantly, open a safe site, and clear your history with one keyboard shortcut. Privacy in a panic.</p>
-    <a href="https://chrome.google.com/webstore/detail/escape-button/..." class="cta-button">Install for Chrome</a>
-  </div>
-</section>
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-icon">⚡</div>
+      <h1>Your Emergency Exit Button</h1>
+      <p>One keystroke. Close all tabs instantly. Open your safe site. Clear your history. All in under a second.</p>
+      <div class="cta-buttons">
+        <a href="https://chrome.google.com/webstore" class="cta-button"><span>📥 Install for Chrome</span></a>
+        <a href="https://github.com/bkeinbest11/Escape_Button" target="_blank" class="cta-button cta-secondary"><span>⭐ View on GitHub</span></a>
+      </div>
+    </div>
+  </section>
 
-<section class="features" id="features">
-  <h2 class="section-title">Why Escape Button?</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <h3>One-Second Protection</h3>
-      <p>Press Ctrl+Shift+Z (Cmd+Shift+Z on Mac) and instantly close everything with one action.</p>
+  <section class="features" id="features">
+    <h2 class="section-title">Why Choose Escape Button?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Lightning Fast</h3>
+        <p>Press Ctrl+Shift+Z and escape in under a second. No delays, no fuss.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>Smart Clearing</h3>
+        <p>Removes all history except sites you whitelist. Complete control over what gets erased.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Your Safe Place</h3>
+        <p>Opens your designated safe site automatically. You choose where you land.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Privacy Obsessed</h3>
+        <p>Zero tracking. Zero analytics. Zero servers. Everything stays on your device.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h3>Simple Setup</h3>
+        <p>Intuitive settings panel. Configure in seconds. No complicated menus.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Open Source</h3>
+        <p>Fully auditable code on GitHub. See exactly what we do. Trust through transparency.</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔐</div>
-      <h3>Smart History Clearing</h3>
-      <p>Removes all browsing history except whitelisted sites you trust. Completely customizable.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🎯</div>
-      <h3>Safe Destination</h3>
-      <p>Automatically opens your designated safe site when activated. Complete control in your hands.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔒</div>
-      <h3>Privacy First</h3>
-      <p>Runs entirely locally. Zero tracking, zero data collection, zero servers. Your business stays private.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">⚙️</div>
-      <h3>Fully Configurable</h3>
-      <p>Set your safe site URL and whitelist sites in seconds through an intuitive settings panel.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🛡️</div>
-      <h3>Open Source</h3>
-      <p>Transparent and auditable. Check the code anytime on GitHub to see exactly what it does.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="how-it-works" id="how">
-  <div class="how-content">
-    <h2 class="section-title">How It Works</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h4>Install & Configure</h4>
-        <p>Add the extension to Chrome. Set your safe site URL and choose which sites to whitelist in the options.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h4>One Keystroke</h4>
-        <p>When you need to escape, press Ctrl+Shift+Z (or Cmd+Shift+Z on Mac) anywhere in your browser.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h4>Instant Protection</h4>
-        <p>All tabs close, your safe site opens in a new tab, and your history is cleared (except whitelisted sites).</p>
+  <section class="how-it-works" id="how">
+    <div class="how-content">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h4>Install & Setup</h4>
+          <p>Add Escape Button to your browser. Configure your safe site URL and whitelist the sites you want to keep in your history.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h4>Press the Button</h4>
+          <p>When you need to escape, press Ctrl+Shift+Z (or Cmd+Shift+Z on Mac) anywhere in your browser.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h4>Complete Protection</h4>
+          <p>All tabs close instantly. Your safe site opens. Your history is cleared except for whitelisted sites. You're safe.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="cta-section">
+    <h2>Ready to Take Control?</h2>
+    <p>Stop worrying about accidental history trails. Escape Button gives you the power to disappear in a single keystroke.</p>
+    <a href="https://chrome.google.com/webstore" class="cta-button"><span>Get Started Now →</span></a>
+  </section>
+</main>
 
 <footer>
-  <p>&copy; 2025 Escape Button. Built with ❤️ for privacy.</p>
-  <p style="margin-top: 15px;">
-    <a href="policy.html">Privacy Policy</a> • 
-    <a href="https://github.com/bkeinbest11/Escape_Button">GitHub</a>
+  <p>&copy; 2025 Escape Button. Built with privacy first.</p>
+  <p style="margin-top: 10px;">
+    <a href="https://github.com/bkeinbest11/Escape_Button">GitHub</a> • 
+    <a href="mailto:bkeinbest11@gmail.com">Contact</a>
   </p>
 </footer>
 
